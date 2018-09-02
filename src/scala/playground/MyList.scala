@@ -31,7 +31,7 @@ abstract class MyList[+A] {
   def ++[B >: A](list: MyList[B]): MyList[B]
 }
 
-object Empty extends MyList[Nothing] {
+case object Empty extends MyList[Nothing] {
   override def head: Nothing = throw new NoSuchElementException
 
   override def tail: MyList[Nothing] = throw new NoSuchElementException
@@ -78,7 +78,7 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
   override def ++[B >: A](list: MyList[B]): MyList[B] = Cons(h, t ++ list)
 }
 
-case object ListApp extends App {
+object ListApp extends App {
   val listOfIntegers = Cons(1, Cons(2, Cons(3, Empty)))
   val anotherList = Cons(3, Cons(2, Cons(1, Empty)))
   val stringList = Cons("Scala", Cons("is", Cons("Awesome", Empty)))
